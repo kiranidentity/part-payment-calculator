@@ -540,3 +540,22 @@ h2 {
 .toggle-btn:hover:not(.active) {
     background: rgba(255, 255, 255, 0.5);
 }
+
+/* Educational Intro Box */
+.intro-info {
+    max-width: 600px;
+    margin: 1.5rem auto 0;
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dbeafe;
+    color: #1e40af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.intro-info strong {
+    color: #1d4ed8;
+    font-weight: 700;
+}
