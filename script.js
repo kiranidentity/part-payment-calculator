@@ -45,7 +45,11 @@ function calculateFreedom() {
     const rateInput = parseFloat(document.getElementById('interest-rate').value);
 
     // Determine which mode is active
+    // Determine which mode is active
     const paymentMode = document.querySelector('input[name="paymentType"]:checked').value;
+
+    console.log('--- Debug Start ---');
+    console.log('Payment Mode:', paymentMode);
 
     let partPaymentInput = 0;
     let onetimePaymentInput = 0;
