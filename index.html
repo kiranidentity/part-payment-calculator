@@ -52,178 +52,231 @@
     <title>Loan Freedom Calculator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Part Payment <span class="highlight">Freedom</span> Calculator</h1>
-            <p class="subtitle">See how small extra payments slash years off your loan</p>
-            <div class="intro-info">
-                <p><strong>Did you know?</strong> Every rupee you pay above your EMI goes directly towards reducing your
-                    <strong>Outstanding Principal</strong>. This drastically lowers future interest, saving you lakhs
-                    and buying back years of your life.
-                </p>
-            </div>
-        </header>
+    <div class="app-wrapper">
+        <!-- Left Sidebar Ad (Desktop Only) -->
+        <aside class="ad-sidebar left">
+            <div class="ad-placeholder vertical">Ad Space Left</div>
+            <!-- Paste Vertical AdSense Code Here -->
+        </aside>
 
-        <main>
-            <!-- AdSlot 1: Top (High Visibility) -->
-            <div class="ad-container">
-                <div class="ad-placeholder">Advertisement</div>
-                <!-- Paste AdSense Code Here -->
-            </div>
-
-            <section class="card calculator-card">
-                <form id="emi-form">
-                    <div class="form-group">
-                        <label for="principal">Current Outstanding Loan Balance (₹)</label>
-                        <input type="number" id="principal" required min="1000" step="any" placeholder="e.g. 50,00,000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="current-emi">Current Monthly EMI (₹)</label>
-                        <input type="number" id="current-emi" required min="1" step="any" placeholder="e.g. 25,000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="interest-rate">Current Annual Interest Rate (%)</label>
-                        <input type="number" id="interest-rate" required min="0.1" step="0.01" placeholder="e.g. 8.5">
-                    </div>
-
-                    <!-- Payment Mode Toggle (Moved Here) -->
-                    <div class="payment-mode-group">
-                        <label class="mode-label">Choose Part Payment Mode:</label>
-                        <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="paymentType" value="monthly" checked>
-                                <span>Monthly Part Payment</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="paymentType" value="onetime">
-                                <span>One-time Payment</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Option A: Monthly Part Payment -->
-                    <div id="monthly-container">
-                        <div class="form-group">
-                            <label for="part-payment">Monthly Part Payment (₹)
-                                <small>Enter how much more you plan to add from now on.</small>
-                            </label>
-                            <input type="number" id="part-payment" step="any" placeholder="e.g. 5000">
-                        </div>
-                    </div>
-
-                    <!-- Option B: One-time Payment -->
-                    <div id="onetime-container" style="display: none;">
-                        <div class="form-group">
-                            <label for="onetime-payment">One-time Payment Amount (₹)
-                                <small>Enter the lump sum amount you pay today.</small>
-                            </label>
-                            <input type="number" id="onetime-payment" placeholder="e.g. 50000">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-primary">Calculate Freedom Date</button>
-
-                    <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
-                </form>
-            </section>
-
-            <!-- AdSlot 2: Middle (High Visibility - Moved outside form for better flow) -->
-            <div class="ad-container" style="margin-bottom: 2rem;">
-                <div class="ad-placeholder">Advertisement</div>
-                <!-- Paste AdSense Code Here -->
-            </div>
-
-            <section id="result-section" class="card hidden">
-                <h2 id="result-heading">Your Freedom Plan</h2>
-
-                <div class="savings-card">
-                    <div class="savings-title" id="banner-title">You will be free</div>
-                    <div class="savings-value" id="banner-value">0</div>
-                    <div class="savings-subtitle" id="banner-subtitle">Months Earlier!</div>
-                    <div class="savings-interest" id="banner-footer">And save <span id="interest-saved-amount">₹0</span>
-                        not paying interest</div>
+        <div class="container">
+            <header class="header">
+                <h1>Part Payment <span class="highlight">Freedom</span> Calculator</h1>
+                <p class="subtitle">See how small extra payments slash years off your loan</p>
+                <div class="intro-info">
+                    <p><strong>Did you know?</strong> Every rupee you pay above your EMI goes directly towards reducing
+                        your
+                        <strong>Outstanding Principal</strong>. This drastically lowers future interest, saving you
+                        lakhs
+                        and buying back years of your life.
+                    </p>
                 </div>
+            </header>
 
-                <!-- Visual Timeline -->
-                <div class="timeline-header">
-                    <div class="toggle-container">
-                        <span class="toggle-label">Show:</span>
-                        <button class="toggle-btn active" data-mode="year">Year</button>
-                        <button class="toggle-btn" data-mode="month">Month</button>
-                    </div>
-                </div>
-
-                <div class="timeline-container">
-                    <div class="timeline-row">
-                        <div class="timeline-label">Current EMI Only</div>
-                        <div class="timeline-track">
-                            <div class="timeline-bar gray" style="width: 100%;">
-                                <span class="bar-label" id="bar-label-standard">--</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-row">
-                        <div class="timeline-label" id="label-timeline-part">With Monthly Part Payment</div>
-                        <div class="timeline-track">
-                            <div class="timeline-bar green" id="bar-smart" style="width: 0%;">
-                                <span class="bar-label" id="bar-label-smart">--</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2 difference-grid">
-                    <div class="diff-item">
-                        <div class="label">Current EMI Only</div>
-                        <div class="value-date" id="date-without-part">--</div>
-                        <div class="value-duration" id="duration-without-part">--</div>
-                    </div>
-                    <div class="diff-item highlight">
-                        <div class="label" id="label-grid-part">With Monthly Part Payment</div>
-                        <div class="value-date" id="date-with-part">--</div>
-                        <div class="value-duration" id="duration-with-part">--</div>
-                    </div>
-                </div>
-
-                <div class="comparison-table">
-                    <h3>Summary</h3>
-                    <div class="row header">
-                        <span style="flex: 1.5;">Metric</span>
-                        <span style="flex: 1; text-align: right;">Current EMI Only</span>
-                        <span id="label-summary-part" style="flex: 1; text-align: right;">With Monthly Part
-                            Payment</span>
-                        <span style="flex: 1; text-align: right; color: var(--success-color);">You Save</span>
-                    </div>
-                    <div class="row">
-                        <span style="flex: 1.5;">Total Interest Payable</span>
-                        <span id="interest-without-part" style="flex: 1; text-align: right;">₹0</span>
-                        <span id="interest-with-part" class="good-text" style="flex: 1; text-align: right;">₹0</span>
-                        <span id="interest-saved-summary" class="good-text"
-                            style="flex: 1; text-align: right; font-weight: 800;">₹0</span>
-                    </div>
-                    <div class="row">
-                        <span style="flex: 1.5;">Time to Finish</span>
-                        <span id="time-without-part" style="flex: 1; text-align: right;">0 Yr</span>
-                        <span id="time-with-part" class="good-text" style="flex: 1; text-align: right;">0 Yr</span>
-                        <span id="time-saved-summary" class="good-text"
-                            style="flex: 1; text-align: right; font-weight: 800;">0 Yr</span>
-                    </div>
-                </div>
-
-                <!-- AdSlot 3: Bottom (Result Context) -->
-                <div class="ad-container" style="margin-top: 2rem;">
+            <main>
+                <!-- AdSlot 1: Top (High Visibility) -->
+                <!-- AdSlot 1: Top (High Visibility) -->
+                <div class="ad-container mobile-ad">
                     <div class="ad-placeholder">Advertisement</div>
                     <!-- Paste AdSense Code Here -->
                 </div>
-            </section>
-        </main>
+
+                <section class="card calculator-card">
+                    <form id="emi-form">
+                        <div class="form-group">
+                            <label for="principal">Current Outstanding Loan Balance (₹)</label>
+                            <input type="number" id="principal" required min="1000" step="any"
+                                placeholder="e.g. 50,00,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="current-emi">Current Monthly EMI (₹)
+                                <small>Enter the actual amount you pay the bank every month.</small>
+                            </label>
+                            <input type="number" id="current-emi" required min="1" step="any" placeholder="e.g. 25,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interest-rate">Current Annual Interest Rate (%)</label>
+                            <input type="number" id="interest-rate" required min="0.1" step="0.01"
+                                placeholder="e.g. 8.5">
+                        </div>
+
+                        <!-- Payment Mode Toggle (Moved Here) -->
+                        <div class="payment-mode-group">
+                            <label class="mode-label">Choose Part Payment Mode:</label>
+                            <div class="radio-options">
+                                <label class="radio-label">
+                                    <input type="radio" name="paymentType" value="monthly" checked>
+                                    <span>Monthly Part Payment</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="paymentType" value="onetime">
+                                    <span>One-time Payment</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Option A: Monthly Part Payment -->
+                        <div id="monthly-container">
+                            <div class="form-group">
+                                <label for="part-payment">Extra Monthly Payment (₹)
+                                    <small>Only the <strong>additional</strong> amount you plan to pay on top of
+                                        EMI.</small>
+                                </label>
+                                <input type="number" id="part-payment" step="any" placeholder="e.g. 5000">
+                            </div>
+                        </div>
+
+                        <!-- Option B: One-time Payment -->
+                        <div id="onetime-container" style="display: none;">
+                            <div class="form-group">
+                                <label for="onetime-payment">One-time Payment Amount (₹)
+                                    <small>Enter the lump sum amount you pay today.</small>
+                                </label>
+                                <input type="number" id="onetime-payment" placeholder="e.g. 50000">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Calculate Freedom Date</button>
+
+                        <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
+                    </form>
+                </section>
+
+                <!-- AdSlot 2: Middle -->
+                <!-- AdSlot 2: Middle -->
+                <div class="ad-container mobile-ad" style="margin-bottom: 2rem;">
+                    <div class="ad-placeholder">Advertisement</div>
+                    <!-- Paste AdSense Code Here -->
+                </div>
+
+                <!-- Welcome State (Visible on Load) -->
+                <section id="welcome-state" class="card welcome-card">
+                    <div class="welcome-icon">👋</div>
+                    <h2>Ready to be Debt-Free?</h2>
+                    <p>Enter your loan details above to see exactly how much time and money you can save with small
+                        extra
+                        payments.</p>
+                    <div class="welcome-steps">
+                        <div class="step">
+                            <span class="step-num">1</span>
+                            <span>Enter Loan Details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step">
+                            <span class="step-num">2</span>
+                            <span>Add Extra Payment</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step">
+                            <span class="step-num">3</span>
+                            <span>See Freedom Date!</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="result-section" class="card hidden">
+                    <h2 id="result-heading">Your Freedom Plan</h2>
+
+                    <div class="savings-card">
+                        <div class="savings-title" id="banner-title">You will be free</div>
+                        <div class="savings-value" id="banner-value">0</div>
+                        <div class="savings-subtitle" id="banner-subtitle">Months Earlier!</div>
+                        <div class="savings-interest" id="banner-footer">And save <span
+                                id="interest-saved-amount">₹0</span>
+                            not paying interest</div>
+                    </div>
+
+                    <!-- Visual Timeline -->
+                    <div class="timeline-header">
+                        <div class="toggle-container">
+                            <span class="toggle-label">Show:</span>
+                            <button class="toggle-btn active" data-mode="year">Year</button>
+                            <button class="toggle-btn" data-mode="month">Month</button>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-row">
+                            <div class="timeline-label">Current EMI Only</div>
+                            <div class="timeline-track">
+                                <div class="timeline-bar gray" style="width: 100%;">
+                                    <span class="bar-label" id="bar-label-standard">--</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-row">
+                            <div class="timeline-label" id="label-timeline-part">With Monthly Part Payment</div>
+                            <div class="timeline-track">
+                                <div class="timeline-bar green" id="bar-smart" style="width: 0%;">
+                                    <span class="bar-label" id="bar-label-smart">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2 difference-grid">
+                        <div class="diff-item">
+                            <div class="label">Current EMI Only</div>
+                            <div class="value-date" id="date-without-part">--</div>
+                            <div class="value-duration" id="duration-without-part">--</div>
+                        </div>
+                        <div class="diff-item highlight">
+                            <div class="label" id="label-grid-part">With Monthly Part Payment</div>
+                            <div class="value-date" id="date-with-part">--</div>
+                            <div class="value-duration" id="duration-with-part">--</div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-table">
+                        <h3>Summary</h3>
+                        <div class="row header">
+                            <span style="flex: 1.5;">Metric</span>
+                            <span style="flex: 1; text-align: right;">Current EMI Only</span>
+                            <span id="label-summary-part" style="flex: 1; text-align: right;">With Monthly Part
+                                Payment</span>
+                            <span style="flex: 1; text-align: right; color: var(--success-color);">You Save</span>
+                        </div>
+                        <div class="row">
+                            <span style="flex: 1.5;">Total Interest Payable</span>
+                            <span id="interest-without-part" style="flex: 1; text-align: right;">₹0</span>
+                            <span id="interest-with-part" class="good-text"
+                                style="flex: 1; text-align: right;">₹0</span>
+                            <span id="interest-saved-summary" class="good-text"
+                                style="flex: 1; text-align: right; font-weight: 800;">₹0</span>
+                        </div>
+                        <div class="row">
+                            <span style="flex: 1.5;">Time to Finish</span>
+                            <span id="time-without-part" style="flex: 1; text-align: right;">0 Yr</span>
+                            <span id="time-with-part" class="good-text" style="flex: 1; text-align: right;">0 Yr</span>
+                            <span id="time-saved-summary" class="good-text"
+                                style="flex: 1; text-align: right; font-weight: 800;">0 Yr</span>
+                        </div>
+                    </div>
+
+                    <!-- AdSlot 3: Bottom (Result Context) -->
+                    <div class="ad-container mobile-ad" style="margin-top: 2rem;">
+                        <div class="ad-placeholder">Advertisement</div>
+                        <!-- Paste AdSense Code Here -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Right Sidebar Ad (Desktop Only) -->
+        <aside class="ad-sidebar right">
+            <div class="ad-placeholder vertical">Ad Space Right</div>
+            <!-- Paste Vertical AdSense Code Here -->
+        </aside>
+
     </div>
     <script src="script.js"></script>
 </body>

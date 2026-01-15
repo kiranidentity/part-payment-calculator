@@ -37,9 +37,10 @@ body {
 }
 
 .container {
-    max-width: 540px;
     margin: 0 auto;
 }
+
+
 
 header {
     text-align: center;
@@ -441,12 +442,12 @@ h2 {
 
 .timeline-track {
     width: 100%;
-    background-color: #f1f5f9;
-    height: 32px;
+    background-color: #e2e8f0;
+    height: 36px;
     border-radius: 50px;
-    overflow: hidden;
     position: relative;
-    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    /* Overflow removed to show labels */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .timeline-bar {
@@ -455,43 +456,53 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 12px;
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-right: 14px;
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy spring effect */
     white-space: nowrap;
+    position: relative;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .timeline-bar.gray {
-    background-color: #94a3b8;
+    background: linear-gradient(to bottom, #94a3b8, #64748b);
     width: 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .timeline-bar.green {
-    background: linear-gradient(90deg, #10b981, #059669);
-    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.bar-label-top,
-.bar-label-bottom {
+/* Glassy Shine Overlay */
+.timeline-bar.green::after,
+.timeline-bar.gray::after {
+    content: '';
     position: absolute;
+    top: 0;
+    left: 0;
     right: 0;
-    white-space: nowrap;
-    line-height: 1;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 50px 50px 0 0;
+    pointer-events: none;
 }
 
-.bar-label-top {
-    bottom: 140%;
-    /* Above the bar */
-    color: var(--text-color);
-    font-size: 0.8rem;
+.bar-label {
+    color: #fff;
+    font-size: 0.85rem;
     font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    z-index: 2;
+    margin-right: -2px;
+    /* Slight offset */
 }
 
-.bar-label-bottom {
-    top: 140%;
-    /* Below the bar */
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-weight: 600;
+/* Ensure text is visible even if bar is small */
+.timeline-bar {
+    min-width: 0;
 }
 
 /* Toggle Switch */
@@ -558,4 +569,232 @@ h2 {
 .intro-info strong {
     color: #1d4ed8;
     font-weight: 700;
+}
+
+/* Welcome State */
+.welcome-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.welcome-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.welcome-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.welcome-card p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.welcome-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.step-num {
+    width: 32px;
+    height: 32px;
+    background: #e0e7ff;
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.step-line {
+    flex: 1;
+    height: 2px;
+    background: #e2e8f0;
+    min-width: 30px;
+    margin-top: -24px;
+    /* Align with dots */
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.step span {
+    display: none;
+    /* Hide text on very small screens, keep numbers */
+}
+}
+
+/* End of float animation */
+
+/* --- RESPONSIVE AD LAYOUT (Moved to end for specificty) --- */
+
+/* Default (Mobile): Sidebars hidden, Stacked layout */
+.ad-sidebar {
+    display: none !important;
+}
+
+.mobile-ad {
+    display: block;
+}
+
+.ad-placeholder.vertical {
+    height: 600px;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Desktop: Grid layout with Sidebars */
+@media (min-width: 1200px) {
+    .app-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 540px 1fr;
+        gap: 2rem;
+        max-width: 1440px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    .container {
+        margin: 0;
+        /* Grid handles spacing */
+        max-width: 100%;
+    }
+
+    .ad-sidebar {
+        display: flex !important;
+        justify-content: center;
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+    }
+
+    .ad-sidebar.left {
+        justify-content: flex-end;
+    }
+
+    .ad-sidebar.right {
+        justify-content: flex-start;
+    }
+
+    /* Hide Top/Bottom inline ads on desktop */
+    .mobile-ad {
+        display: none;
+    }
+}
+
+/* UNIVERSAL CARD LAYOUT (Desktop & Mobile) */
+.comparison-table {
+    border: none;
+    background: transparent;
+    margin-top: 2rem;
+}
+
+.comparison-table h3 {
+    display: none;
+    /* Hide generic title */
+}
+
+.comparison-table .row.header {
+    display: none;
+    /* Hide header row */
+}
+
+.comparison-table .row {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    gap: 0.75rem;
+    transition: transform 0.2s ease;
+}
+
+.comparison-table .row:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.comparison-table .row:last-child {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Metric Title (e.g. Total Interest) */
+.comparison-table .row span:nth-child(1) {
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Data Values (Row Items) */
+.comparison-table .row span:nth-child(2),
+.comparison-table .row span:nth-child(3),
+.comparison-table .row span:nth-child(4) {
+    text-align: right !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Pseudo Labels */
+.comparison-table .row span:nth-child(2)::before {
+    content: "Current EMI:";
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+.comparison-table .row span:nth-child(3)::before {
+    content: "With Part Pay:";
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+.comparison-table .row span:nth-child(4)::before {
+    content: "You Save:";
+    color: var(--success-color);
+    font-weight: 700;
+    font-size: 0.95rem;
 }
