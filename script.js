@@ -43,8 +43,18 @@ function calculateFreedom() {
     const principalInput = parseFloat(document.getElementById('principal').value);
     const emiInput = parseFloat(document.getElementById('current-emi').value);
     const rateInput = parseFloat(document.getElementById('interest-rate').value);
-    const partPaymentInput = parseFloat(document.getElementById('part-payment').value) || 0;
-    const onetimePaymentInput = parseFloat(document.getElementById('onetime-payment').value) || 0;
+
+    // Determine which mode is active
+    const paymentMode = document.querySelector('input[name="paymentType"]:checked').value;
+
+    let partPaymentInput = 0;
+    let onetimePaymentInput = 0;
+
+    if (paymentMode === 'monthly') {
+        partPaymentInput = parseFloat(document.getElementById('part-payment').value) || 0;
+    } else {
+        onetimePaymentInput = parseFloat(document.getElementById('onetime-payment').value) || 0;
+    }
 
     // 2. Validate basic logic
     const monthlyRate = rateInput / 12 / 100;
