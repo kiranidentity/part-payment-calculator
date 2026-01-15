@@ -35,7 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
         resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    // ... (rest of listeners) ...
+    // Payment Mode Logic
+    const monthlyContainer = document.getElementById('monthly-container');
+    const onetimeContainer = document.getElementById('onetime-container');
+    const partPaymentInput = document.getElementById('part-payment');
+    const onetimePaymentInput = document.getElementById('onetime-payment');
+    const paymentRadios = document.querySelectorAll('input[name="paymentType"]');
+
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.value === 'monthly') {
+                monthlyContainer.style.display = 'block';
+                onetimeContainer.style.display = 'none';
+                onetimePaymentInput.value = ''; // Reset inactive
+            } else {
+                monthlyContainer.style.display = 'none';
+                onetimeContainer.style.display = 'block';
+                partPaymentInput.value = ''; // Reset inactive
+            }
+        });
+    });
 });
 
 function calculateFreedom() {
@@ -44,7 +63,6 @@ function calculateFreedom() {
     const emiInput = parseFloat(document.getElementById('current-emi').value);
     const rateInput = parseFloat(document.getElementById('interest-rate').value);
 
-    // Determine which mode is active
     // Determine which mode is active
     const paymentMode = document.querySelector('input[name="paymentType"]:checked').value;
 
@@ -59,6 +77,10 @@ function calculateFreedom() {
     } else {
         onetimePaymentInput = parseFloat(document.getElementById('onetime-payment').value) || 0;
     }
+
+    console.log('Part Payment Value:', partPaymentInput);
+    console.log('One time Payment Value:', onetimePaymentInput);
+    console.log('--- Debug End ---');
 
     // 2. Validate basic logic
     const monthlyRate = rateInput / 12 / 100;
