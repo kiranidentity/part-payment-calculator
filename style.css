@@ -319,12 +319,15 @@ h2 {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-color);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0;
+    /* Removed spacing to group with duration */
 }
 
 .diff-item .value-duration {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--text-muted);
+    margin-top: 2px;
 }
 
 .diff-item.highlight .value-date {
