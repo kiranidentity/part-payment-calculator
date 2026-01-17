@@ -25,6 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Hide Demo Banner on Interaction
+    const demoBanner = document.getElementById('demo-banner');
+    if (demoBanner) {
+        const hideBanner = () => {
+            demoBanner.style.opacity = '0';
+            demoBanner.style.height = '0';
+            demoBanner.style.padding = '0';
+            demoBanner.style.margin = '0';
+            demoBanner.style.border = 'none';
+            // Remove listener so it happens only once
+            form.removeEventListener('input', hideBanner);
+        };
+        form.addEventListener('input', hideBanner);
+    }
+
     form.addEventListener('submit', (e) => {
         // ... (lines 28-39 unchanged) ...
         e.preventDefault();
