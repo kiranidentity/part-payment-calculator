@@ -170,6 +170,17 @@ input[type="number"]:focus {
     margin-top: 1.25rem;
 }
 
+.pro-tip {
+    margin-top: 1.5rem;
+    background: #f0fdf4;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    line-height: 1.5;
+}
+
 /* Results Section */
 .hidden {
     display: none;

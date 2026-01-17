@@ -84,7 +84,10 @@
                     <section class="card calculator-card">
                         <form id="emi-form">
                             <div class="form-group">
-                                <label for="principal">Current Outstanding Loan Balance (₹)</label>
+                                <label for="principal">Current Outstanding Loan Balance (₹)
+                                    <small>The exact principal amount remaining from your statement. Do not enter
+                                        original loan amount.</small>
+                                </label>
                                 <input type="number" id="principal" required min="1000" step="any"
                                     placeholder="e.g. 50,00,000">
                             </div>
@@ -98,7 +101,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="interest-rate">Current Annual Interest Rate (%)</label>
+                                <label for="interest-rate">Current Annual Interest Rate (%)
+                                    <small>Your loan's interest rate. E.g. 8.5% for Home Loans, 10.5% for Car
+                                        Loans.</small>
+                                </label>
                                 <input type="number" id="interest-rate" required min="0.1" step="0.01"
                                     placeholder="e.g. 8.5">
                             </div>
@@ -142,6 +148,11 @@
                             <button type="submit" class="btn-primary">Calculate My Savings</button>
 
                             <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
+
+                            <div class="pro-tip">
+                                💡 <strong>Pro Tip:</strong> Even a 5% increase in your EMI can reduce your tenure by
+                                years. Try experimenting above!
+                            </div>
                         </form>
                     </section>
                 </div>
