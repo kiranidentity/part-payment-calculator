@@ -150,12 +150,6 @@ function displayResults(withPart, withoutPart, partPayment, oneTimePayment) {
     const interestWithoutPartEl = document.getElementById('interest-without-part');
     const chartBarSmart = document.getElementById('bar-smart');
 
-    // Difference Dates
-    const dateWithoutEl = document.getElementById('date-without-part');
-    const durationWithoutEl = document.getElementById('duration-without-part');
-    const dateWithEl = document.getElementById('date-with-part');
-    const durationWithEl = document.getElementById('duration-with-part');
-
     const today = new Date();
     const dateOptions = { month: 'short', year: 'numeric' };
 
@@ -178,7 +172,7 @@ function displayResults(withPart, withoutPart, partPayment, oneTimePayment) {
     if (oneTimePayment > 0 && partPayment === 0) labelText = "With One-time Payment";
     else if (oneTimePayment > 0 && partPayment > 0) labelText = "With Part Payments";
 
-    const dynamicIds = ['label-grid-part', 'label-summary-part', 'label-timeline-part'];
+    const dynamicIds = ['label-summary-part', 'label-timeline-part'];
     dynamicIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.textContent = labelText;
@@ -189,13 +183,6 @@ function displayResults(withPart, withoutPart, partPayment, oneTimePayment) {
 
     const savedInterest = withoutPart.totalInterest - withPart.totalInterest;
     document.getElementById('interest-saved-amount').textContent = formatMoney(savedInterest > 0 ? savedInterest : 0);
-
-    // Populate Difference Grid
-    dateWithoutEl.textContent = endDateWithoutInfo.toLocaleDateString('en-IN', dateOptions);
-    durationWithoutEl.textContent = formatDuration(withoutPart.months);
-
-    dateWithEl.textContent = endDateWithInfo.toLocaleDateString('en-IN', dateOptions);
-    durationWithEl.textContent = formatDuration(withPart.months);
 
     // Render Timeline Bar Width
     // Determine scale based on max months
@@ -234,15 +221,20 @@ function updateSummaryTime(withPart, withoutPart) {
     const savedMonths = withoutPart.months - withPart.months;
     const finalSaved = savedMonths > 0 ? savedMonths : 0;
 
+    const today = new Date();
+    const dateOptions = { month: 'short', year: 'numeric' };
+    const dateWithout = new Date(today.getFullYear(), today.getMonth() + withoutPart.months, 1);
+    const dateWith = new Date(today.getFullYear(), today.getMonth() + withPart.months, 1);
+
     if (currentViewMode === 'year') {
-        // Year Mode: X Yr Y Mo
-        timeWithoutEl.textContent = formatDuration(withoutPart.months);
-        timeWithEl.textContent = formatDuration(withPart.months);
+        // Year Mode: X Yr Y Mo (Nov 2030)
+        timeWithoutEl.textContent = `${formatDuration(withoutPart.months)} (${dateWithout.toLocaleDateString('en-IN', dateOptions)})`;
+        timeWithEl.textContent = `${formatDuration(withPart.months)} (${dateWith.toLocaleDateString('en-IN', dateOptions)})`;
         timeSavedEl.textContent = formatDuration(finalSaved);
     } else {
-        // Month Mode: X Months
-        timeWithoutEl.textContent = `${withoutPart.months} Months`;
-        timeWithEl.textContent = `${withPart.months} Months`;
+        // Month Mode: X Months (Nov 2030)
+        timeWithoutEl.textContent = `${withoutPart.months} Months (${dateWithout.toLocaleDateString('en-IN', dateOptions)})`;
+        timeWithEl.textContent = `${withPart.months} Months (${dateWith.toLocaleDateString('en-IN', dateOptions)})`;
         timeSavedEl.textContent = `${finalSaved} Months`;
     }
 }
