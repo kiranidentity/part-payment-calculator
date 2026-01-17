@@ -672,14 +672,14 @@ h2 {
 /* Desktop: Side-by-Side Grid */
 @media (min-width: 1024px) {
     .container {
-        max-width: 1200px;
-        /* Wider for split view */
+        max-width: 1000px;
+        /* Width adjusted for crisp, balanced look */
     }
 
     .calculator-split-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
         align-items: start;
         /* Align tops of cards */
     }
