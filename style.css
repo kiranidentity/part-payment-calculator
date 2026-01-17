@@ -656,18 +656,42 @@ h2 {
 
 /* End of float animation */
 
-/* --- MAIN LAYOUT RESPONSIVENESS (Simplified for Auto Ads) --- */
+/* --- MAIN LAYOUT RESPONSIVENESS (Split Layout) --- */
 .container {
-    max-width: 800px;
+    max-width: 600px;
+    /* Default narrow for mobile/stacked */
     margin: 0 auto;
     width: 100%;
+    padding-bottom: 2rem;
 }
 
+/* Desktop: Side-by-Side Grid */
 @media (min-width: 1024px) {
-
-    /* Optional: Ensure it doesn't get too wide on large screens */
     .container {
-        max-width: 900px;
+        max-width: 1200px;
+        /* Wider for split view */
+    }
+
+    .calculator-split-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: start;
+        /* Align tops of cards */
+    }
+
+    /* Ensure cards fill their grid area */
+    .calculator-card,
+    #result-section {
+        height: 100%;
+        margin-bottom: 0;
+        /* Remove bottom margin in grid */
+    }
+
+    /* Sticky toggle for input section if content is long */
+    .layout-left {
+        position: sticky;
+        top: 2rem;
     }
 }
 
