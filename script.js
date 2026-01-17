@@ -53,6 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Populate Default Values & Calculate
+    document.getElementById('principal').value = 4500000;
+    document.getElementById('current-emi').value = 45000;
+    document.getElementById('interest-rate').value = 7.60;
+    document.getElementById('part-payment').value = 25000;
+
+    // Trigger Initial Calculation
+    resultSection.classList.remove('hidden');
+    calculateFreedom();
 });
 
 function calculateFreedom() {
