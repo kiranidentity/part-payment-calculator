@@ -656,47 +656,62 @@ h2 {
 
 /* End of float animation */
 
-/* --- RESPONSIVE LAYOUT & ADS --- */
+/* --- RESPONSIVE AD LAYOUT (Moved to end for specificty) --- */
 
-/* Universal Ad Banner */
-.banner-ad {
+/* Default (Mobile): Sidebars hidden, Stacked layout */
+.ad-sidebar {
+    display: none !important;
+}
+
+.mobile-ad {
     display: block;
-    margin-bottom: 2rem;
 }
 
 .ad-placeholder.vertical {
-    display: none;
-    /* Removed vertical ads */
-}
-
-/* Default (Mobile): Stacked Layout */
-.desktop-split {
+    height: 600px;
+    width: 100%;
+    max-width: 300px;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Desktop: Split View (Side-by-Side) */
-@media (min-width: 1024px) {
-    .container {
-        max-width: 1200px;
-        /* Wider container for split view */
-    }
-
-    .desktop-split {
+/* Desktop: Grid layout with Sidebars */
+@media (min-width: 1200px) {
+    .app-wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        /* Equal columns */
-        gap: 2.5rem;
+        grid-template-columns: 1fr 540px 1fr;
+        gap: 2rem;
+        max-width: 1440px;
+        margin: 0 auto;
         align-items: start;
     }
 
-    /* Form Card Adjustment */
-    .calculator-card {
+    .container {
+        margin: 0;
+        /* Grid handles spacing */
+        max-width: 100%;
+    }
+
+    .ad-sidebar {
+        display: flex !important;
+        justify-content: center;
         position: sticky;
         top: 2rem;
-        /* Keep form visible while scrolling results if results are long */
-        margin-bottom: 0;
+        height: fit-content;
+    }
+
+    .ad-sidebar.left {
+        justify-content: flex-end;
+    }
+
+    .ad-sidebar.right {
+        justify-content: flex-start;
+    }
+
+    /* Hide Top/Bottom inline ads on desktop */
+    .mobile-ad {
+        display: none;
     }
 }
 
