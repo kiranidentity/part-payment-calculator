@@ -84,12 +84,6 @@
                     <section class="card calculator-card">
                         <h2 class="card-title">Loan Details</h2>
 
-                        <div id="demo-banner" class="demo-banner">
-                            👋 <strong>Viewing Example:</strong> Replace these values with your own loan details to see
-                            your
-                            savings.
-                        </div>
-
                         <form id="emi-form">
                             <div class="form-group">
                                 <label for="principal">Current Outstanding Loan Balance (₹)
@@ -164,84 +158,83 @@
                         </form>
                     </section>
                 </div>
-            </div>
 
-            <!-- Right Section: Results -->
-            <div class="layout-right">
-                <section id="result-section" class="card hidden">
-                    <h2 class="card-title">Freedom Plan</h2>
+                <!-- Right Section: Results -->
+                <div class="layout-right">
+                    <section id="result-section" class="card hidden">
+                        <h2 class="card-title">Freedom Plan</h2>
 
-                    <div class="savings-card">
-                        <div class="savings-title" id="banner-title">You will be free</div>
-                        <div class="savings-value" id="banner-value">0</div>
-                        <div class="savings-subtitle" id="banner-subtitle">Months Earlier!</div>
-                        <div class="savings-interest" id="banner-footer">And save <span
-                                id="interest-saved-amount">₹0</span>
-                            not paying interest</div>
-                    </div>
-
-                    <!-- Visual Timeline -->
-                    <div class="timeline-header">
-                        <div class="toggle-container">
-                            <span class="toggle-label">Show:</span>
-                            <button class="toggle-btn active" data-mode="year">Year</button>
-                            <button class="toggle-btn" data-mode="month">Month</button>
+                        <div class="savings-card">
+                            <div class="savings-title" id="banner-title">You will be free</div>
+                            <div class="savings-value" id="banner-value">0</div>
+                            <div class="savings-subtitle" id="banner-subtitle">Months Earlier!</div>
+                            <div class="savings-interest" id="banner-footer">And save <span
+                                    id="interest-saved-amount">₹0</span>
+                                not paying interest</div>
                         </div>
-                    </div>
 
-                    <div class="timeline-container">
-                        <div class="timeline-row">
-                            <div class="timeline-label">Current EMI Only</div>
-                            <div class="timeline-track">
-                                <div class="timeline-bar gray" style="width: 100%;">
-                                    <span class="bar-label" id="bar-label-standard">--</span>
+                        <!-- Visual Timeline -->
+                        <div class="timeline-header">
+                            <div class="toggle-container">
+                                <span class="toggle-label">Show:</span>
+                                <button class="toggle-btn active" data-mode="year">Year</button>
+                                <button class="toggle-btn" data-mode="month">Month</button>
+                            </div>
+                        </div>
+
+                        <div class="timeline-container">
+                            <div class="timeline-row">
+                                <div class="timeline-label">Current EMI Only</div>
+                                <div class="timeline-track">
+                                    <div class="timeline-bar gray" style="width: 100%;">
+                                        <span class="bar-label" id="bar-label-standard">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-row">
+                                <div class="timeline-label" id="label-timeline-part">With Monthly Part Payment</div>
+                                <div class="timeline-track">
+                                    <div class="timeline-bar green" id="bar-smart" style="width: 0%;">
+                                        <span class="bar-label" id="bar-label-smart">--</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="timeline-row">
-                            <div class="timeline-label" id="label-timeline-part">With Monthly Part Payment</div>
-                            <div class="timeline-track">
-                                <div class="timeline-bar green" id="bar-smart" style="width: 0%;">
-                                    <span class="bar-label" id="bar-label-smart">--</span>
-                                </div>
+
+
+
+                        <div class="comparison-table">
+                            <h3>Summary</h3>
+                            <div class="row header">
+                                <span style="flex: 1.5;">Metric</span>
+                                <span style="flex: 1; text-align: right;">Current EMI Only</span>
+                                <span id="label-summary-part" style="flex: 1; text-align: right;">With Monthly Part
+                                    Payment</span>
+                                <span style="flex: 1; text-align: right; color: var(--success-color);">You Save</span>
+                            </div>
+                            <div class="row">
+                                <span style="flex: 1.5;">Total Interest Payable</span>
+                                <span id="interest-without-part" style="flex: 1; text-align: right;">₹0</span>
+                                <span id="interest-with-part" class="good-text"
+                                    style="flex: 1; text-align: right;">₹0</span>
+                                <span id="interest-saved-summary" class="good-text"
+                                    style="flex: 1; text-align: right; font-weight: 800;">₹0</span>
+                            </div>
+                            <div class="row">
+                                <span style="flex: 1.5;">Time to Finish</span>
+                                <span id="time-without-part" style="flex: 1; text-align: right;">0 Yr</span>
+                                <span id="time-with-part" class="good-text" style="flex: 1; text-align: right;">0
+                                    Yr</span>
+                                <span id="time-saved-summary" class="good-text"
+                                    style="flex: 1; text-align: right; font-weight: 800;">0 Yr</span>
                             </div>
                         </div>
-                    </div>
-
-
-
-                    <div class="comparison-table">
-                        <h3>Summary</h3>
-                        <div class="row header">
-                            <span style="flex: 1.5;">Metric</span>
-                            <span style="flex: 1; text-align: right;">Current EMI Only</span>
-                            <span id="label-summary-part" style="flex: 1; text-align: right;">With Monthly Part
-                                Payment</span>
-                            <span style="flex: 1; text-align: right; color: var(--success-color);">You Save</span>
-                        </div>
-                        <div class="row">
-                            <span style="flex: 1.5;">Total Interest Payable</span>
-                            <span id="interest-without-part" style="flex: 1; text-align: right;">₹0</span>
-                            <span id="interest-with-part" class="good-text"
-                                style="flex: 1; text-align: right;">₹0</span>
-                            <span id="interest-saved-summary" class="good-text"
-                                style="flex: 1; text-align: right; font-weight: 800;">₹0</span>
-                        </div>
-                        <div class="row">
-                            <span style="flex: 1.5;">Time to Finish</span>
-                            <span id="time-without-part" style="flex: 1; text-align: right;">0 Yr</span>
-                            <span id="time-with-part" class="good-text" style="flex: 1; text-align: right;">0
-                                Yr</span>
-                            <span id="time-saved-summary" class="good-text"
-                                style="flex: 1; text-align: right; font-weight: 800;">0 Yr</span>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-    </div>
 
 
-    </main>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
