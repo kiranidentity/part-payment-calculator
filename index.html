@@ -80,86 +80,90 @@
         <main>
             <div class="calculator-split-layout">
                 <!-- Left Section: Inputs -->
-                <section class="card calculator-card">
-                    <h2 class="card-title">Loan Details</h2>
+                <div class="layout-left">
+                    <section class="card calculator-card">
+                        <h2 class="card-title">Loan Details</h2>
 
-                    <div id="demo-banner" class="demo-banner">
-                        👋 <strong>Viewing Example:</strong> Replace these values with your own loan details to see your
-                        savings.
-                    </div>
-
-                    <form id="emi-form">
-                        <div class="form-group">
-                            <label for="principal">Current Outstanding Loan Balance (₹)
-                                <small>The exact principal amount remaining from your statement. Do not enter
-                                    original loan amount.</small>
-                            </label>
-                            <input type="number" id="principal" required min="1000" step="any"
-                                placeholder="e.g. 50,00,000">
+                        <div id="demo-banner" class="demo-banner">
+                            👋 <strong>Viewing Example:</strong> Replace these values with your own loan details to see
+                            your
+                            savings.
                         </div>
 
-                        <div class="form-group">
-                            <label for="current-emi">Current Monthly EMI (₹)
-                                <small>Enter the actual amount you pay the bank every month.</small>
-                            </label>
-                            <input type="number" id="current-emi" required min="1" step="any" placeholder="e.g. 25,000">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="interest-rate">Current Annual Interest Rate (%)
-                                <small>Your loan's interest rate. E.g. 8.5% for Home Loans, 10.5% for Car
-                                    Loans.</small>
-                            </label>
-                            <input type="number" id="interest-rate" required min="0.1" step="0.01"
-                                placeholder="e.g. 8.5">
-                        </div>
-
-                        <!-- Payment Mode Toggle -->
-                        <div class="payment-mode-group">
-                            <label class="mode-label">Choose Part Payment Mode:</label>
-                            <div class="radio-options">
-                                <label class="radio-label">
-                                    <input type="radio" name="paymentType" value="monthly" checked>
-                                    <span>Monthly Part Payment</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="paymentType" value="onetime">
-                                    <span>One-time Payment</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Option A: Monthly Part Payment -->
-                        <div id="monthly-container">
+                        <form id="emi-form">
                             <div class="form-group">
-                                <label for="part-payment">Extra Monthly Payment (₹)
-                                    <small>Only the <strong>additional</strong> amount you plan to pay on top of
-                                        EMI.</small>
+                                <label for="principal">Current Outstanding Loan Balance (₹)
+                                    <small>The exact principal amount remaining from your statement. Do not enter
+                                        original loan amount.</small>
                                 </label>
-                                <input type="number" id="part-payment" step="any" placeholder="e.g. 5000">
+                                <input type="number" id="principal" required min="1000" step="any"
+                                    placeholder="e.g. 50,00,000">
                             </div>
-                        </div>
 
-                        <!-- Option B: One-time Payment -->
-                        <div id="onetime-container" style="display: none;">
                             <div class="form-group">
-                                <label for="onetime-payment">One-time Payment Amount (₹)
-                                    <small>Enter the lump sum amount you pay today.</small>
+                                <label for="current-emi">Current Monthly EMI (₹)
+                                    <small>Enter the actual amount you pay the bank every month.</small>
                                 </label>
-                                <input type="number" id="onetime-payment" placeholder="e.g. 50000">
+                                <input type="number" id="current-emi" required min="1" step="any"
+                                    placeholder="e.g. 25,000">
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn-primary">Calculate My Savings</button>
+                            <div class="form-group">
+                                <label for="interest-rate">Current Annual Interest Rate (%)
+                                    <small>Your loan's interest rate. E.g. 8.5% for Home Loans, 10.5% for Car
+                                        Loans.</small>
+                                </label>
+                                <input type="number" id="interest-rate" required min="0.1" step="0.01"
+                                    placeholder="e.g. 8.5">
+                            </div>
 
-                        <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
+                            <!-- Payment Mode Toggle -->
+                            <div class="payment-mode-group">
+                                <label class="mode-label">Choose Part Payment Mode:</label>
+                                <div class="radio-options">
+                                    <label class="radio-label">
+                                        <input type="radio" name="paymentType" value="monthly" checked>
+                                        <span>Monthly Part Payment</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="paymentType" value="onetime">
+                                        <span>One-time Payment</span>
+                                    </label>
+                                </div>
+                            </div>
 
-                        <div class="pro-tip">
-                            💡 <strong>Pro Tip:</strong> Even a 5% increase in your EMI can reduce your tenure by
-                            years. Try experimenting above!
-                        </div>
-                    </form>
-                </section>
+                            <!-- Option A: Monthly Part Payment -->
+                            <div id="monthly-container">
+                                <div class="form-group">
+                                    <label for="part-payment">Extra Monthly Payment (₹)
+                                        <small>Only the <strong>additional</strong> amount you plan to pay on top of
+                                            EMI.</small>
+                                    </label>
+                                    <input type="number" id="part-payment" step="any" placeholder="e.g. 5000">
+                                </div>
+                            </div>
+
+                            <!-- Option B: One-time Payment -->
+                            <div id="onetime-container" style="display: none;">
+                                <div class="form-group">
+                                    <label for="onetime-payment">One-time Payment Amount (₹)
+                                        <small>Enter the lump sum amount you pay today.</small>
+                                    </label>
+                                    <input type="number" id="onetime-payment" placeholder="e.g. 50000">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Calculate My Savings</button>
+
+                            <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
+
+                            <div class="pro-tip">
+                                💡 <strong>Pro Tip:</strong> Even a 5% increase in your EMI can reduce your tenure by
+                                years. Try experimenting above!
+                            </div>
+                        </form>
+                    </section>
+                </div>
             </div>
 
             <!-- Right Section: Results -->
