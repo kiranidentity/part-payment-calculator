@@ -656,64 +656,21 @@ h2 {
 
 /* End of float animation */
 
-/* --- RESPONSIVE AD LAYOUT (Moved to end for specificty) --- */
-
-/* Default (Mobile): Sidebars hidden, Stacked layout */
-.ad-sidebar {
-    display: none !important;
-}
-
-.mobile-ad {
-    display: block;
-}
-
-.ad-placeholder.vertical {
-    height: 600px;
+/* --- MAIN LAYOUT RESPONSIVENESS (Simplified for Auto Ads) --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
     width: 100%;
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Desktop: Grid layout with Sidebars */
-@media (min-width: 1200px) {
-    .app-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 540px 1fr;
-        gap: 2rem;
-        max-width: 1440px;
-        margin: 0 auto;
-        align-items: start;
-    }
+@media (min-width: 1024px) {
 
+    /* Optional: Ensure it doesn't get too wide on large screens */
     .container {
-        margin: 0;
-        /* Grid handles spacing */
-        max-width: 100%;
-    }
-
-    .ad-sidebar {
-        display: flex !important;
-        justify-content: center;
-        position: sticky;
-        top: 2rem;
-        height: fit-content;
-    }
-
-    .ad-sidebar.left {
-        justify-content: flex-end;
-    }
-
-    .ad-sidebar.right {
-        justify-content: flex-start;
-    }
-
-    /* Hide Top/Bottom inline ads on desktop */
-    .mobile-ad {
-        display: none;
+        max-width: 900px;
     }
 }
+
 
 /* UNIVERSAL CARD LAYOUT (Desktop & Mobile) */
 .comparison-table {
