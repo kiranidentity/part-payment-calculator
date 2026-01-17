@@ -4,7 +4,6 @@ let lastResults = null; // Store results for toggling
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('emi-form');
-    const welcomeState = document.getElementById('welcome-state');
     const resultSection = document.getElementById('result-section');
 
     // Toggle Logic
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         // ... (lines 28-39 unchanged) ...
         e.preventDefault();
-        if (welcomeState) welcomeState.style.display = 'none';
         resultSection.classList.remove('hidden');
         calculateFreedom();
         resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
