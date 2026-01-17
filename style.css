@@ -691,8 +691,7 @@ h2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
-        align-items: start;
-        /* Align tops of cards */
+        /* align-items: stretch; is default, ensuring equal height */
     }
 
     /* Ensure cards fill their grid area */
@@ -700,13 +699,16 @@ h2 {
     #result-section {
         height: 100%;
         margin-bottom: 0;
-        /* Remove bottom margin in grid */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Distributes extra space nicely */
     }
 
-    /* Sticky toggle for input section if content is long */
-    .layout-left {
-        position: sticky;
-        top: 2rem;
+    .layout-left,
+    .layout-right {
+        height: 100%;
+        /* Ensure wrappers pass down height */
     }
 }
 
