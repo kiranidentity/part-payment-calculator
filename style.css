@@ -283,7 +283,8 @@ h2 {
 
 .radio-options {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .radio-label {
