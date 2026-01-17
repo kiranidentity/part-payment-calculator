@@ -211,6 +211,18 @@ h2 {
     color: var(--text-color);
 }
 
+.card-title {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
 /* Savings Card */
 .savings-card {
     text-align: center;
