@@ -90,7 +90,7 @@
                                     <small>The exact principal amount remaining from your statement. Do not enter
                                         original loan amount.</small>
                                 </label>
-                                <input type="number" id="principal" required min="1000" step="any"
+                                <input type="text" id="principal" required inputmode="numeric"
                                     placeholder="e.g. 50,00,000">
                             </div>
 
@@ -98,7 +98,7 @@
                                 <label for="current-emi">Current Monthly EMI (₹)
                                     <small>Enter the actual amount you pay the bank every month.</small>
                                 </label>
-                                <input type="number" id="current-emi" required min="1" step="any"
+                                <input type="text" id="current-emi" required inputmode="numeric"
                                     placeholder="e.g. 25,000">
                             </div>
 
@@ -133,7 +133,7 @@
                                         <small>Only the <strong>additional</strong> amount you plan to pay on top of
                                             EMI.</small>
                                     </label>
-                                    <input type="number" id="part-payment" step="any" placeholder="e.g. 5000">
+                                    <input type="text" id="part-payment" inputmode="numeric" placeholder="e.g. 5,000">
                                 </div>
                             </div>
 
@@ -143,7 +143,8 @@
                                     <label for="onetime-payment">One-time Payment Amount (₹)
                                         <small>Enter the lump sum amount you pay today.</small>
                                     </label>
-                                    <input type="number" id="onetime-payment" placeholder="e.g. 50000">
+                                    <input type="text" id="onetime-payment" inputmode="numeric"
+                                        placeholder="e.g. 50,000">
                                 </div>
                             </div>
 

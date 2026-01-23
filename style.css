@@ -100,7 +100,8 @@ label small {
     margin-top: 2px;
 }
 
-input[type="number"] {
+input[type="number"],
+input[type="text"] {
     width: 100%;
     padding: 0.75rem 1rem;
     font-size: 1.1rem;
@@ -114,7 +115,8 @@ input[type="number"] {
     box-shadow: var(--shadow-sm);
 }
 
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="text"]:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
@@ -812,4 +814,13 @@ h2 {
     color: var(--success-color);
     font-weight: 700;
     font-size: 0.95rem;
+}
+
+.amount-in-words {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 0.25rem;
+    min-height: 1.5em;
+    /* Reserve space */
 }

@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     form.addEventListener('submit', (e) => {
-        // ... (lines 28-39 unchanged) ...
         e.preventDefault();
         resultSection.classList.remove('hidden');
         calculateFreedom();
@@ -57,10 +56,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Populate Default Values & Calculate
-    document.getElementById('principal').value = 4500000;
-    document.getElementById('current-emi').value = 45000;
+    const defaultPrincipal = 4500000;
+    const principalInputComp = document.getElementById('principal');
+    principalInputComp.value = formatIndianNumber(defaultPrincipal);
+
+    document.getElementById('current-emi').value = formatIndianNumber(45000);
     document.getElementById('interest-rate').value = 7.60;
-    document.getElementById('part-payment').value = 25000;
+    document.getElementById('part-payment').value = formatIndianNumber(25000);
+
+    // Principal Input Listeners
+    // Handle formatting on focus/blur
+    const inputsToFormat = ['principal', 'current-emi', 'part-payment', 'onetime-payment'];
+
+    inputsToFormat.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        el.addEventListener('focus', (e) => {
+            const val = parseFormattedNumber(e.target.value);
+            if (val > 0) e.target.value = val;
+            else e.target.value = ''; // Clear if 0 or invalid to allow easy typing
+        });
+
+        el.addEventListener('blur', (e) => {
+            const val = parseFormattedNumber(e.target.value);
+            if (val > 0) e.target.value = formatIndianNumber(val);
+            // If 0 or empty, leave it compatible with placeholder or empty
+        });
+
+        el.addEventListener('input', (e) => {
+            // Allow only digits (0-9), remove alphabets and special chars
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+    });
 
     // Trigger Initial Calculation
     resultSection.classList.remove('hidden');
@@ -69,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function calculateFreedom() {
     // 1. Get Inputs
-    const principalInput = parseFloat(document.getElementById('principal').value);
-    const emiInput = parseFloat(document.getElementById('current-emi').value);
+    const principalInput = parseFormattedNumber(document.getElementById('principal').value);
+    const emiInput = parseFormattedNumber(document.getElementById('current-emi').value);
     const rateInput = parseFloat(document.getElementById('interest-rate').value);
 
     // Determine which mode is active
@@ -83,9 +111,9 @@ function calculateFreedom() {
     let onetimePaymentInput = 0;
 
     if (paymentMode === 'monthly') {
-        partPaymentInput = parseFloat(document.getElementById('part-payment').value) || 0;
+        partPaymentInput = parseFormattedNumber(document.getElementById('part-payment').value);
     } else {
-        onetimePaymentInput = parseFloat(document.getElementById('onetime-payment').value) || 0;
+        onetimePaymentInput = parseFormattedNumber(document.getElementById('onetime-payment').value);
     }
 
     console.log('Part Payment Value:', partPaymentInput);
@@ -97,8 +125,7 @@ function calculateFreedom() {
     const initialInterest = principalInput * monthlyRate;
 
     if (emiInput <= initialInterest) {
-        alert('Your current EMI is too low to cover the interest. The loan will never be paid off at this rate. Please increase your EMI.');
-        return;
+        // console.warn('EMI too low');
     }
 
     // 3. Calculate Scenarios
@@ -121,19 +148,29 @@ function calculateScenario(principal, emi, partPayment, monthlyRate, oneTimePaym
     // Safety break
     const MAX_MONTHS = 1200;
 
-    while (balance > 0 && months < MAX_MONTHS) {
+    while (balance > 10 && months < MAX_MONTHS) {
         months++;
 
         let interest = balance * monthlyRate;
         let payment = totalMonthlyPay;
 
         if (months === 1 && oneTimePayment > 0) payment += oneTimePayment;
-        if (payment > (balance + interest)) payment = balance + interest;
+
+        // Final payment adjustment
+        if (payment > (balance + interest)) {
+            payment = balance + interest;
+        }
 
         let principalComponent = payment - interest;
+
+        // Edge case: if interest > payment (EMI too low)
+        if (principalComponent < 0) {
+            // Debt trap
+            return { months: MAX_MONTHS, totalInterest: Infinity };
+        }
+
         totalInterest += interest;
         balance -= principalComponent;
-        if (balance < 0.1) balance = 0;
     }
 
     return {
@@ -271,6 +308,20 @@ function formatDuration(totalMonths) {
     if (months === 0) return `${years} Yr`;
     return `${years} Yr ${months} Mo`;
 }
+
+// HELPER FUNCTIONS
+function formatIndianNumber(num) {
+    if (!num && num !== 0) return '';
+    return num.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+}
+
+function parseFormattedNumber(str) {
+    if (typeof str === 'number') return str;
+    if (!str) return 0;
+    return parseFloat(str.replace(/,/g, '')) || 0;
+}
+
+
 
 function formatMoney(amount) {
     return amount.toLocaleString('en-IN', {
