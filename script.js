@@ -27,12 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        resultSection.classList.remove('hidden');
-        calculateFreedom();
-        resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    // form.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     resultSection.classList.remove('hidden');
+    //     calculateFreedom();
+    //     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // });
+    // Prevent default form submission if enter is pressed
+    form.addEventListener('submit', (e) => e.preventDefault());
 
     // Payment Mode Logic
     const monthlyContainer = document.getElementById('monthly-container');
@@ -50,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 monthlyContainer.style.display = 'none';
                 onetimeContainer.style.display = 'block';
-                partPaymentInput.value = ''; // Reset inactive
+                onetimePaymentInput.value = ''; // Reset inactive
             }
+            calculateFreedom();
         });
     });
 
@@ -88,6 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Allow only digits (0-9), remove alphabets and special chars
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
         });
+    });
+
+    // Auto-calculate listeners
+    const allInputs = ['principal', 'current-emi', 'interest-rate', 'part-payment', 'onetime-payment'];
+    allInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', calculateFreedom);
+        }
     });
 
     // Trigger Initial Calculation
@@ -148,7 +160,7 @@ function calculateScenario(principal, emi, partPayment, monthlyRate, oneTimePaym
     // Safety break
     const MAX_MONTHS = 1200;
 
-    while (balance > 10 && months < MAX_MONTHS) {
+    while (balance > 100 && months < MAX_MONTHS) {
         months++;
 
         let interest = balance * monthlyRate;
