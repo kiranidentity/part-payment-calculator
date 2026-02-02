@@ -54,7 +54,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-6031196392278827">
@@ -63,21 +63,18 @@
 </head>
 
 <body>
+    <!-- Shared Header Injection -->
+    <div id="shared-header"></div>
+
     <div class="container">
-        <header class="header">
+        <!-- New Concise Header for the Calculator Page -->
+        <header class="page-header">
             <h1>Part Payment <span class="highlight">Calculator</span></h1>
             <p class="subtitle">See how small extra payments slash years off your loan</p>
-            <div class="intro-info">
-                <p><strong>Did you know?</strong> Every rupee you pay above your EMI goes directly towards reducing
-                    your
-                    <strong>Outstanding Principal</strong>. This drastically lowers future interest, saving you
-                    lakhs
-                    and buying back years of your life.
-                </p>
-            </div>
         </header>
 
         <main>
+            <!-- Calculator Section (Core Tool) -->
             <div class="calculator-split-layout">
                 <!-- Left Section: Inputs -->
                 <div class="layout-left">
@@ -148,13 +145,11 @@
                                 </div>
                             </div>
 
-
-
                             <p class="note">Assumes your current EMI and interest rate remain unchanged.</p>
 
                             <div class="pro-tip">
-                                💡 <strong>Pro Tip:</strong> Even a 5% increase in your EMI can reduce your tenure by
-                                years. Try experimenting above!
+                                💡 <strong>Pro Tip:</strong> even a 5% increase in your EMI can reduce your tenure by
+                                years. check <a href="guide.html">Benefits Guide</a> for more.
                             </div>
                         </form>
                     </section>
@@ -202,8 +197,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="comparison-table">
                             <h3>Summary</h3>
                             <div class="row header">
@@ -233,10 +226,13 @@
                     </section>
                 </div>
             </div>
-
-
         </main>
     </div>
+
+    <!-- Shared Footer Injection -->
+    <div id="shared-footer"></div>
+
+    <script src="common.js"></script>
     <script src="script.js"></script>
 </body>
 
